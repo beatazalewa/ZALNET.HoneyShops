@@ -2,8 +2,7 @@
   "profiles": {
     "ZALNET.HoneyShops.Sender": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7227",
-      "launchBrowser": false
+      "commandLineArgs": "host start --pause-on-error"
     }
   }
 }
