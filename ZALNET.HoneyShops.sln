@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZALNET.HoneyShops.Sender", "ZALNET.HoneyShops.Sender\ZALNET.HoneyShops.Sender.csproj", "{575E1DCB-29CC-44A2-BB8A-6CA056982281}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{575E1DCB-29CC-44A2-BB8A-6CA056982281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{575E1DCB-29CC-44A2-BB8A-6CA056982281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{575E1DCB-29CC-44A2-BB8A-6CA056982281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{575E1DCB-29CC-44A2-BB8A-6CA056982281}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC9E13EE-A5D5-40E1-B153-87D87B691347}
+	EndGlobalSection
+EndGlobal
