@@ -20,14 +20,16 @@ namespace ZALNET.HoneyShops.Sender
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             string name = req.Query["name"];
+            string order = req.Query["order"];
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
+            order = order ?? data?.order;
 
-            string responseMessage = string.IsNullOrEmpty(name)
+            string responseMessage = string.IsNullOrEmpty(name) && string.IsNullOrEmpty(order)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
+                : $"Hello, {name}. Your order is: {order}.";
 
             return new OkObjectResult(responseMessage);
         }
