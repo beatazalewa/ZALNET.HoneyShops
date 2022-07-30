@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ZALNET.HoneyShops.Receiver": {
+      "commandName": "Project",
+      "commandLineArgs": "host start --pause-on-error"
+    }
+  }
+}
