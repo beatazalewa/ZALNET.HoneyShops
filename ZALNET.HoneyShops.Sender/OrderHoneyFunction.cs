@@ -20,7 +20,7 @@ namespace ZALNET.HoneyShops.Sender
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-            QueueClient client = new QueueClient("Endpoint=sb://zalnethoneyshops.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=clWiyF1jrNFuioVhuFrfVxqKNQwRL/BI5kxGiswbJ5w=", "orders");
+            QueueClient client = new QueueClient("", "orders");
 
             string name = req.Query["name"];
             string order = req.Query["order"];
