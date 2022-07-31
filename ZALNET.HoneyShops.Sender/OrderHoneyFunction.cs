@@ -6,7 +6,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Azure.ServiceBus;
+using Azure.Messaging.ServiceBus;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -20,7 +20,13 @@ namespace ZALNET.HoneyShops.Sender
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-            QueueClient client = new QueueClient("", "orders");
+            // Create a ServiceBusClient that will authenticate using a connection string
+            string connectionString = "Endpoint=sb://zalnethoneyshops.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=clWiyF1jrNFuioVhuFrfVxqKNQwRL/BI5kxGiswbJ5w=";
+            string queueName = "orders";
+            // since ServiceBusClient implements IAsyncDisposable we create it with "await using"
+            await using var client = new ServiceBusClient(connectionString);
+            
+            //QueueClient client = new QueueClient("", "orders");
 
             string name = req.Query["name"];
             string order = req.Query["order"];
@@ -29,21 +35,13 @@ namespace ZALNET.HoneyShops.Sender
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
             order = order ?? data?.order;
-
-            string responseMessage;
-
-            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(order))
-            {
-                responseMessage = "This HTTP triggered function executed successfully. Pass a name and an order in the query string or in the request body for a personalized response.";
-            }
-            else
-            {
-                responseMessage = $"Hello, {name}. Your order is: {order}.";
-
-                Message message = new Message(Encoding.UTF8.GetBytes(responseMessage));
-                await client.SendAsync(message);
-            }
-            return new OkObjectResult(responseMessage);
+            // create the sender
+            ServiceBusSender sender = client.CreateSender(queueName);
+            // create a message that we can send. UTF-8 encoding is used when providing a string.
+            //ServiceBusMessage message = new ServiceBusMessage($"Hello, {name}. Your order is: {order}.");
+            ServiceBusMessage message = new ServiceBusMessage($"Hello Beata");
+            await sender.SendMessageAsync(message);
+            return new OkObjectResult(message);
         }
     }
 }
